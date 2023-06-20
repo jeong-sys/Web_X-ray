@@ -1,0 +1,25 @@
+from flask import Flask, render_template, request
+app = Flask(__name__) #플라스크 애플리케이션 생성
+
+@app.route('/', methods=['GET', 'POST']) #URL과 플라스크 코드를 매핑하는 플라스크 데코레이터, 웹서버 Request : get, post
+def index():
+    
+    name = ""
+
+    if request.method == 'POST':
+        if request.form.get('action1') == 'VALUE1':
+            pass
+        elif request.form.get('action2') == 'VALUE2':
+            pass
+        else:
+            pass
+    elif request.method == 'GET':
+        name = request.args.get("name", "hi")
+        return render_template('index.html', name = name)
+    
+    return render_template("index.html")
+
+
+if __name__ == '__main__': #스크립트가 직접 실행 될 때만 개발 웹 서버 실행
+    app.run(host='0.0.0.0', debug=True)
+    # app.run(host='0.0.0.0')
